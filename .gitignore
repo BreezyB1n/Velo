@@ -1,0 +1,47 @@
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.prof
+*.cover
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Go build
+/bin/
+/build/
+/dist/
+/tmp/
+
+# Go workspace
+/go.work
+/go.work.sum
+
+# IDE/editor
+.idea/
+.vscode/
+*.code-workspace
+.DS_Store
+
+# Env
+.env
+.env.*
+
+# Coverage
+coverage/
+
+# Vendor (if used)
+/vendor/
+
+# Logs
+logs/
+
+# docs
+docs/
+

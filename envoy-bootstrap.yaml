@@ -1,0 +1,39 @@
+node:
+  id: test-envoy-01
+  cluster: test-cluster
+
+dynamic_resources:
+  ads_config:
+    api_type: GRPC
+    transport_api_version: V3
+    grpc_services:
+    - envoy_grpc:
+        cluster_name: velo_xds
+
+  cds_config:
+    resource_api_version: V3
+    ads: {}
+  lds_config:
+    resource_api_version: V3
+    ads: {}
+
+static_resources:
+  clusters:
+  - name: velo_xds
+    type: STRICT_DNS
+    dns_lookup_family: V4_ONLY
+    # connect_timeout: 1s # default is 5s
+    load_assignment:
+      cluster_name: velo_xds
+      endpoints:
+      - lb_endpoints:
+        - endpoint:
+            address:
+              socket_address:
+                address: host.docker.internal
+                port_value: 18000
+    typed_extension_protocol_options:
+      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+        "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+        explicit_http_config:
+          http2_protocol_options: {}
